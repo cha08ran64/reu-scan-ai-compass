@@ -5,8 +5,6 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Camera, Upload, Zap, CheckCircle, AlertCircle, Recycle, Trash2, Battery, Leaf, RotateCcw, Download } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { useScanHistory } from '@/hooks/useScanHistory';
-import { useAuth } from '@/components/AuthProvider';
 
 interface ScanResult {
   item_name: string;
@@ -39,8 +37,6 @@ export const EnhancedAIScanner: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cameraInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
-  const { addScanRecord } = useScanHistory();
-  const { user } = useAuth();
 
   const mockScanResults: ScanResult[] = [
     {
@@ -152,32 +148,11 @@ export const EnhancedAIScanner: React.FC = () => {
   }, []);
 
   const simulateAdvancedAIScan = async (imageFile?: File) => {
-    if (!user) {
-      toast({
-        title: "Authentication Required",
-        description: "Please sign in to use the advanced AI scanning feature.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setIsScanning(true);
     
     try {
-      // Simulate advanced AI processing with multiple stages
-      const stages = [
-        "Analyzing image composition...",
-        "Detecting object boundaries...",
-        "Identifying material properties...",
-        "Cross-referencing recycling database...",
-        "Calculating environmental impact...",
-        "Generating sustainability insights..."
-      ];
-
-      for (let i = 0; i < stages.length; i++) {
-        await new Promise(resolve => setTimeout(resolve, 800));
-        // Could update UI with current stage if desired
-      }
+      // Faster AI processing - reduced delay for better user experience
+      await new Promise(resolve => setTimeout(resolve, 1500)); // Reduced from 4800ms to 1500ms
       
       const randomResult = mockScanResults[Math.floor(Math.random() * mockScanResults.length)];
       
@@ -186,28 +161,15 @@ export const EnhancedAIScanner: React.FC = () => {
       randomResult.confidence_score = Math.max(85, Math.min(99, randomResult.confidence_score + confidenceVariance));
       
       setScanResult(randomResult);
-      
-      // Save to database
-      await addScanRecord(randomResult);
-      
       setIsScanning(false);
       
       toast({
-        title: "Advanced AI Analysis Complete!",
+        title: "AI Analysis Complete!",
         description: `Identified: ${randomResult.item_name} with ${Math.round(randomResult.confidence_score)}% confidence`,
       });
       
-      // Show eco points earned
-      if (randomResult.eco_points > 0) {
-        setTimeout(() => {
-          toast({
-            title: `+${randomResult.eco_points} Eco Points Earned!`,
-            description: "Thank you for contributing to sustainability!",
-          });
-        }, 1500);
-      }
     } catch (error) {
-      console.error('Error processing advanced scan:', error);
+      console.error('Error processing scan:', error);
       toast({
         title: "AI Analysis Failed",
         description: "There was an error processing your scan. Please try again.",
@@ -331,10 +293,10 @@ Fun Fact: ${scanResult.fun_facts}
               <div className="bg-gradient-to-br from-green-100 to-blue-100 w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-8">
                 <Camera className="h-16 w-16 text-green-600" />
               </div>
-              <h3 className="text-3xl font-semibold mb-6">Advanced AI Recognition</h3>
+              <h3 className="text-3xl font-semibold mb-6">AI-Powered Recognition</h3>
               <p className="text-gray-600 mb-8 text-lg leading-relaxed max-w-2xl mx-auto">
-                Upload an image of any item to get comprehensive sustainability insights powered by cutting-edge AI. 
-                Our advanced machine learning analyzes material composition, environmental impact, and provides detailed recycling guidance.
+                Upload an image of any item to get instant sustainability insights. 
+                Our AI analyzes material composition, environmental impact, and provides detailed recycling guidance.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 max-w-md mx-auto">
                 <Button 
@@ -386,10 +348,9 @@ Fun Fact: ${scanResult.fun_facts}
               <div className="bg-gradient-to-br from-blue-100 to-green-100 w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
                 <Zap className="h-16 w-16 text-blue-600 animate-bounce" />
               </div>
-              <h3 className="text-3xl font-semibold mb-6">Advanced AI Analysis in Progress</h3>
+              <h3 className="text-3xl font-semibold mb-6">AI Analysis in Progress</h3>
               <p className="text-gray-600 mb-6 text-lg">
-                Our AI is performing comprehensive analysis including material identification, 
-                environmental impact assessment, and recycling pathway optimization...
+                Analyzing your image for material identification and sustainability insights...
               </p>
               <div className="w-full max-w-md mx-auto bg-gray-200 rounded-full h-3 mb-6">
                 <div className="bg-gradient-to-r from-green-500 to-blue-500 h-3 rounded-full animate-pulse" style={{width: '85%'}}></div>
@@ -463,7 +424,7 @@ Fun Fact: ${scanResult.fun_facts}
               
               <div className="space-y-6 text-left">
                 <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
-                  <h4 className="font-semibold text-blue-800 mb-3 text-lg">🤖 Advanced AI Analysis</h4>
+                  <h4 className="font-semibold text-blue-800 mb-3 text-lg">🤖 AI Analysis</h4>
                   <p className="text-blue-700">{scanResult.ai_generated_info}</p>
                   <div className="mt-3 pt-3 border-t border-blue-200">
                     <p className="text-sm text-blue-600">{scanResult.detailed_analysis}</p>
