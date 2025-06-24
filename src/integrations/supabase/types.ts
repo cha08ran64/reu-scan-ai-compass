@@ -9,7 +9,276 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      community_items: {
+        Row: {
+          bin_type: string | null
+          category: string | null
+          created_at: string
+          description: string | null
+          downvotes: number | null
+          id: string
+          image_url: string | null
+          item_name: string
+          material_type: string | null
+          upvotes: number | null
+          user_id: string
+          verified: boolean | null
+        }
+        Insert: {
+          bin_type?: string | null
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          downvotes?: number | null
+          id?: string
+          image_url?: string | null
+          item_name: string
+          material_type?: string | null
+          upvotes?: number | null
+          user_id: string
+          verified?: boolean | null
+        }
+        Update: {
+          bin_type?: string | null
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          downvotes?: number | null
+          id?: string
+          image_url?: string | null
+          item_name?: string
+          material_type?: string | null
+          upvotes?: number | null
+          user_id?: string
+          verified?: boolean | null
+        }
+        Relationships: []
+      }
+      educational_content: {
+        Row: {
+          category: string | null
+          content: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          published: boolean | null
+          tags: string[] | null
+          title: string
+          video_url: string | null
+        }
+        Insert: {
+          category?: string | null
+          content?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          published?: boolean | null
+          tags?: string[] | null
+          title: string
+          video_url?: string | null
+        }
+        Update: {
+          category?: string | null
+          content?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          published?: boolean | null
+          tags?: string[] | null
+          title?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          created_at: string
+          data: Json | null
+          id: string
+          message: string | null
+          read: boolean | null
+          title: string
+          type: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          data?: Json | null
+          id?: string
+          message?: string | null
+          read?: boolean | null
+          title: string
+          type?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          data?: Json | null
+          id?: string
+          message?: string | null
+          read?: boolean | null
+          title?: string
+          type?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
+      recycling_centers: {
+        Row: {
+          accepted_materials: string[] | null
+          address: string
+          created_at: string
+          id: string
+          latitude: number | null
+          longitude: number | null
+          name: string
+          operating_hours: Json | null
+          phone: string | null
+          website: string | null
+        }
+        Insert: {
+          accepted_materials?: string[] | null
+          address: string
+          created_at?: string
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          name: string
+          operating_hours?: Json | null
+          phone?: string | null
+          website?: string | null
+        }
+        Update: {
+          accepted_materials?: string[] | null
+          address?: string
+          created_at?: string
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          name?: string
+          operating_hours?: Json | null
+          phone?: string | null
+          website?: string | null
+        }
+        Relationships: []
+      }
+      scan_history: {
+        Row: {
+          ai_generated_info: string | null
+          bin_type: string | null
+          carbon_saved: number | null
+          category: string | null
+          confidence_score: number | null
+          created_at: string
+          eco_advice: string | null
+          eco_points: number | null
+          fun_facts: string | null
+          id: string
+          image_url: string | null
+          item_name: string
+          material_type: string | null
+          recyclable: boolean | null
+          reusable: boolean | null
+          user_id: string
+        }
+        Insert: {
+          ai_generated_info?: string | null
+          bin_type?: string | null
+          carbon_saved?: number | null
+          category?: string | null
+          confidence_score?: number | null
+          created_at?: string
+          eco_advice?: string | null
+          eco_points?: number | null
+          fun_facts?: string | null
+          id?: string
+          image_url?: string | null
+          item_name: string
+          material_type?: string | null
+          recyclable?: boolean | null
+          reusable?: boolean | null
+          user_id: string
+        }
+        Update: {
+          ai_generated_info?: string | null
+          bin_type?: string | null
+          carbon_saved?: number | null
+          category?: string | null
+          confidence_score?: number | null
+          created_at?: string
+          eco_advice?: string | null
+          eco_points?: number | null
+          fun_facts?: string | null
+          id?: string
+          image_url?: string | null
+          item_name?: string
+          material_type?: string | null
+          recyclable?: boolean | null
+          reusable?: boolean | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_points: {
+        Row: {
+          badges: string[] | null
+          created_at: string
+          id: string
+          level: number | null
+          total_points: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          badges?: string[] | null
+          created_at?: string
+          id?: string
+          level?: number | null
+          total_points?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          badges?: string[] | null
+          created_at?: string
+          id?: string
+          level?: number | null
+          total_points?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
