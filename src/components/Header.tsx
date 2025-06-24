@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Leaf, User, Menu, LogOut, History } from 'lucide-react';
+import { Leaf, User, Menu, LogOut } from 'lucide-react';
 import { AuthModal } from '@/components/AuthModal';
 import { useAuth } from '@/components/AuthProvider';
 import {
@@ -36,27 +36,16 @@ export const Header = () => {
             </span>
           </div>
           
-          <nav className="hidden md:flex items-center space-x-6">
-            <a href="#scan" className="text-gray-700 hover:text-green-600 transition-colors">Scan</a>
-            <a href="#features" className="text-gray-700 hover:text-green-600 transition-colors">Features</a>
-            <a href="#community" className="text-gray-700 hover:text-green-600 transition-colors">Community</a>
-            <a href="#about" className="text-gray-700 hover:text-green-600 transition-colors">About</a>
-          </nav>
-          
           <div className="flex items-center space-x-3">
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="hidden md:flex">
+                  <Button variant="ghost" size="sm">
                     <User className="h-4 w-4 mr-2" />
                     Account
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem>
-                    <History className="h-4 w-4 mr-2" />
-                    Scan History
-                  </DropdownMenuItem>
                   <DropdownMenuItem onClick={handleSignOut}>
                     <LogOut className="h-4 w-4 mr-2" />
                     Sign Out
@@ -66,8 +55,7 @@ export const Header = () => {
             ) : (
               <Button 
                 variant="ghost" 
-                size="sm" 
-                className="hidden md:flex"
+                size="sm"
                 onClick={() => setAuthModalOpen(true)}
               >
                 <User className="h-4 w-4 mr-2" />
@@ -75,9 +63,6 @@ export const Header = () => {
               </Button>
             )}
             
-            <Button className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700">
-              {user ? 'Start Scanning' : 'Get Started'}
-            </Button>
             <Button variant="ghost" size="sm" className="md:hidden">
               <Menu className="h-5 w-5" />
             </Button>
